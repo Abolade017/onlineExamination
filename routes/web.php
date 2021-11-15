@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SessionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/reg', [RegisterController::class, 'create']);
-Route::post('/reg',[RegisterController::class, 'store']);
+Route::get('/reg', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('/reg',[RegisterController::class, 'store'])->middleware('guest');
+
+//login and logout session
+Route::get('/log-in', [SessionsController::class, 'create'])->middleware('guest');
+Route::post('/sessions', [SessionsController::class, 'store'])->middleware('guest');
+Route::post('/logout',[SessionsController::class,'destroy'])->middleware('auth');
