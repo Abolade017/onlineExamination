@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ExamController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Models\Exam;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ExamController::class, 'show']);
+Route::get('/exam/{course-name}',[ExamController::class, 'create']);
 Route::get('/reg', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('/reg',[RegisterController::class, 'store'])->middleware('guest');
 
