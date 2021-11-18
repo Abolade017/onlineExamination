@@ -2,7 +2,7 @@
     <div class="mx-auto max-w-3xl my-40">
         <h1 class="text-center font-bold text-2xl text-blue-500 py-6">Log in</h1>
         <div class="border border-gray-100 h-auto w-full rounded-lg  ">
-            <form action="/sessions" method="post">
+            <form action="{{route('sessions')}}" method="post">
                 @csrf
                 <div class="px-10 py-10">
                     <div class="mb-6">

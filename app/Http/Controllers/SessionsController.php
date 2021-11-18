@@ -13,6 +13,9 @@ class SessionsController extends Controller
     }
     public function store()
     {
+
+        // dd(request()->all());
+
         //validate the user
         $validated = request()->validate([
             'email' => 'required|email',
@@ -21,12 +24,12 @@ class SessionsController extends Controller
         //attemp to authenticate and log in the user
         if (auth()->attempt($validated)) {
             //session fixation
-            session()->regenarate();
+            session()->regenerate();
             //redirect the user to the home page
             return redirect('/')->with('success', 'you are logged in');
         }
         // authentication failed
-        throw ValidationException::withMessages(['email' => 'your email cannot be verified']);
+        throw ValidationException::withMessages(['email' => 'your email cannot be found']);
         // return back()
         // ->withInput()
         // ->withErrors(['email'=>'your email cannot be verified']);
