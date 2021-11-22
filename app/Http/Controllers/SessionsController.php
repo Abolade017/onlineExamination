@@ -21,6 +21,9 @@ class SessionsController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+
+        // dd($validated);
+
         //attemp to authenticate and log in the user
         if (auth()->attempt($validated)) {
             //session fixation

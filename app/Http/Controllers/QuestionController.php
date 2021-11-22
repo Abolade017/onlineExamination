@@ -15,6 +15,7 @@ class QuestionController extends Controller
     }
     public function store(Request $request)
     {
+        // dd(request()->all());
         $request->validate([
             'question' => 'required',
             'answer1' => 'required',
@@ -24,16 +25,16 @@ class QuestionController extends Controller
             'correctAnswer' => 'required',
         ]);
 
-        $ee = new ExamQuestions;
+        $ee = new ExamQuestions();
 
         $ee->question = $request->get('question');
-        $ee->correct_answer = $request->get('correctAnswer');
-        $ee->answer1 = $request->get('answer1');
-        $ee->answer2 = $request->get('answer2');
-        $ee->answer3 = $request->get('answer3');
-        $ee->answer4 = $request->get('answer4');
+        $ee->option_one = $request->get('answer1');
+        $ee->option_two = $request->get('answer2');
+        $ee->option_three = $request->get('answer3');
+        $ee->option_four = $request->get('answer4');
+        $ee->answer = $request->get('correctAnswer');
         $ee->save();
-        
+
         return back()->with('success', 'question updated');
     }
 }

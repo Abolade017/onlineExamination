@@ -21,7 +21,7 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <label for="answer" name="answer" class=" text-md font-bold mb-4 block">Answer2</label>
+                        <label for="answer2" name="answer" class=" text-md font-bold mb-4 block">Answer2</label>
                         <textarea name="answer2" id="answer2" class="w-full border border-gray-200"
                             value="{{ old('answer2') }}" required></textarea>
                         @error('answer2')
@@ -61,7 +61,7 @@
         </form>
     </section>
     @if (session('success'))
-        <div class="alert alert-success rounded-2xl flex justify-end bg-blue-600 text-white">
+        <div class="alert alert-success rounded-2xl flex justify-end bg-blue-600 text-white w-48  mb-10">
             {{ session('success') }}
         </div>
     @endif

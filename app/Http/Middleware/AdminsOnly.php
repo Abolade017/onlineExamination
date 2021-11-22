@@ -20,7 +20,7 @@ class AdminsOnly
         if (auth()->guest()) {
             abort(403);
         }
-        if (auth()->user()->username!=='admin@01' ) {
+        if (!auth()->user()->is_admin) {
             abort(Response::HTTP_FORBIDDEN);
         }
         return $next($request);

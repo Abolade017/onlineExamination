@@ -16,7 +16,7 @@ class CreateResultsTable extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('course_name');
+            $table->foreignId('exam_id');
             $table->integer('exam_score');
             $table->string('grade');
             $table->timestamps();

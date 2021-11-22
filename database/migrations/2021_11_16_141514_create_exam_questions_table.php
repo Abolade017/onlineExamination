@@ -16,11 +16,11 @@ class CreateExamQuestionsTable extends Migration
         Schema::create('exam_questions', function (Blueprint $table) {
             $table->id();
             $table->string('question');
-            $table->string('answer1');
-            $table->string('answer2');
-            $table->string('answer3');
-            $table->string('answer4');
-            $table->string('correct_answer');
+            $table->string('option_one');
+            $table->string('option_two');
+            $table->string('option_three');
+            $table->string('option_four');
+            $table->string('answer');
             $table->timestamps();
         });
     }

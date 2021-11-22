@@ -19,8 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ExamController::class, 'show']);
-Route::get('/exam/{course-name}', [ExamController::class, 'create']);
+Route::get('/', [CourseController::class, 'show'])->middleware('auth');
+//course list page
+Route::get('/admin/course/create',[CourseController::class, 'create']);
+Route::post('/admin/courses', [CourseController::class, 'store'])->middleware('admin')->name('course');
+
 Route::get('/reg', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('/reg', [RegisterController::class, 'store'])->middleware('guest');
 
@@ -31,5 +34,3 @@ Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth
 //exam question
 Route::get('/admin/question/create', [QuestionController::class, 'create'])->middleware('admin');
 Route::post('/admin/questions',[QuestionController::class, 'store'])->middleware('admin')->name('questions');
-//course list page
-Route::get('/admin/course',[CourseController::class, 'create'])->middleware('admin')->name('course');
