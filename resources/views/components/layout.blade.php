@@ -8,6 +8,8 @@
 
     <title>Laravel</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -27,16 +29,21 @@
             <div class="flex items-center space-x-4">
                 @auth
                     <span class="font-bold uppercase text-xs px-4">welcome,{{ auth()->user()->name }}</span>
+
+
                     <form action="/logout" method="post">
                         @csrf
                         <x-form.button>Logout</x-form.button>
                     </form>
+
                 @else
                     <a href="/reg" class="font-bold text-lg text-blue-500 hover:text-blue-700 hover:underline">Register</a>
                     <a href="{{ route('login') }}"
                         class="font-bold text-lg text-blue-500 hover:text-blue-700 hover:underline">Login</a>
                 @endauth
             </div>
+
+        </div>
         </div>
     </header>
 

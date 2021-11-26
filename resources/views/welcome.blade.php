@@ -17,9 +17,9 @@
                     </tr>
                     @foreach ($courses as $course)
                     <tr class="border border-gray-200">
-                            <td class="border border-gray-200"><a href="#" class="text-sm ">{{ $course->name }}</a></td>
-                            <td class="border border-gray-200"><a href="#" class="text-sm ">{{ $course->unit }}</a></td>
-                            <td class="border border-gray-200"><a href="#" class="text-sm ">{{ $course->duration }} mins</a></td>
+                            <td class="border border-gray-200"><a href="{{route('questions')}}" class="text-sm ">{{ $course->name }}</a></td>
+                            <td class="border border-gray-200"><a href="{{route('questions')}}" class="text-sm ">{{ $course->unit }}</a></td>
+                            <td class="border border-gray-200"><a href="{{route('questions')}}" class="text-sm ">{{ $course->duration }} mins</a></td>
 
                     @endforeach
                     </table>

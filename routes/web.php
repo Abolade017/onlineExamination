@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Models\Exam;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Console\Helper\QuestionHelper;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CourseController::class, 'show'])->middleware('auth');
+Route::get('/dashboard',function(){
+    return view('dashboard');
+})->middleware('admin')->name('dashboard');
 //course list page
-Route::get('/admin/course/create',[CourseController::class, 'create']);
+Route::get('/admin/course/create', [CourseController::class, 'create'])->middleware('admin')->name('create-course');
 Route::post('/admin/courses', [CourseController::class, 'store'])->middleware('admin')->name('course');
 
 Route::get('/reg', [RegisterController::class, 'create'])->middleware('guest');
@@ -31,6 +35,10 @@ Route::post('/reg', [RegisterController::class, 'store'])->middleware('guest');
 Route::get('/log-in', [SessionsController::class, 'create'])->name('login')->middleware('guest');
 Route::post('/sessions', [SessionsController::class, 'store'])->name('sessions')->middleware('guest');
 Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth');
+
 //exam question
 Route::get('/admin/question/create', [QuestionController::class, 'create'])->middleware('admin');
-Route::post('/admin/questions',[QuestionController::class, 'store'])->middleware('admin')->name('questions');
+Route::post('/admin/questions', [QuestionController::class, 'store'])->middleware('admin')->name('questions');
+
+//load exam question for student
+Route::get('/exam-questions', [QuestionController::class, 'show'])->middleware('auth')->name('load-question');

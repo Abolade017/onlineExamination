@@ -35,6 +35,15 @@ class QuestionController extends Controller
         $ee->answer = $request->get('correctAnswer');
         $ee->save();
 
-        return back()->with('success', 'question updated');
+        return view('questions.load-question')->with('success', 'question updated');
+    }
+    public function show()
+    {
+
+        $examQuestions = ExamQuestions::get();
+        return view('questions.load-question', [
+            'exam_questions' => $examQuestions
+            
+        ]);
     }
 }
