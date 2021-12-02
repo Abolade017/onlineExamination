@@ -9,6 +9,9 @@
     <title>Laravel</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
+    <script src="js/app.js"></script>
+    {{-- <script src="{{ mix('/js/app.js') }}"></script> --}}
+
 
 
     <!-- Fonts -->

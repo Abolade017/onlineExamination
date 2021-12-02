@@ -51,7 +51,11 @@
             @endforeach
         </div>
     </section>
-    <div class="flex justify-end items center pr-6">
+    <div id="app">
+    </div> 
+    
+     {{-- <div class="flex justify-end items center pr-6">
         <div class="flex justify-center items-center w-48 h-20 bg-blue-500 text-white rounded-lg text-2xl ">Timer</div>
-    </div>
+    </div> --}}
 </x-layout>
+
