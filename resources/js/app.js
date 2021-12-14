@@ -2,6 +2,7 @@ require('./bootstrap');
 import { createApp } from 'vue';
 
 import App from './components/App.vue';
-
+import ExampleComponent from './components/ExampleComponent.vue';
 const app=createApp(App);
-app.mount("#app")
+app.component('example-component', ExampleComponent);
+app.mount("#app");

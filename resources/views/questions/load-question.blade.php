@@ -52,8 +52,16 @@
         </div>
     </section>
     <div id="app">
+        <example-component
+        {{-- :startTime= ""
+        :endTime=""
+        :hours=""
+        :minutes=""
+        :seconds="" --}}
+        ></example-component>
     </div> 
-    
+    <script src="{{ asset('js/app.js') }}"></script>
+
      {{-- <div class="flex justify-end items center pr-6">
         <div class="flex justify-center items-center w-48 h-20 bg-blue-500 text-white rounded-lg text-2xl ">Timer</div>
     </div> --}}
