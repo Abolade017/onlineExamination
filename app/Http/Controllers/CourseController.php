@@ -10,6 +10,7 @@ class CourseController extends Controller
     public function show()
     {
         $courses = Course::all();
+        // dd($courses);
         return view('welcome', [
             'courses' => $courses
         ]);
@@ -24,18 +25,20 @@ class CourseController extends Controller
         // dd(request()->all());
 
         $request->validate([
-            'course_name' => 'required|max:255',
-            'course_unit' => 'required',
-            'duration'=>'required'
+            'title' => 'required|max:255',
+            'unit' => 'required|max:255',
+            'code' => 'required|max:255',
+            'duration' => 'required|max:255'
         ]);
 
-       $cc = new Course();
-       $cc->name = $request->get('course_name');
-       $cc->duration = $request->get('duration');
-       $cc->unit = $request->get('course_unit');
-       $cc->save();
+        $cc = new Course();
+        $cc->title = $request->get('title');
+        $cc->duration = $request->get('duration');
+        $cc->course_code = $request->get('code');
+        $cc->unit = $request->get('unit');
+        $cc->save();
 
-    // return view('welcome');
+        // return view('welcome');
         return redirect('/')->with('success', 'Course updated successfully');
     }
 }

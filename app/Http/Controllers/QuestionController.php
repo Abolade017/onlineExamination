@@ -3,47 +3,47 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
-use App\Models\ExamQuestions;
+use App\Models\Course;
+use App\Models\ExamQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\Rule;
 
 class QuestionController extends Controller
 {
     public function create()
     {
-        return view('questions.create');
+        $courses = Course::all();
+        // dd($courses);
+        return view('questions.create', [
+            'courses' => $courses
+        ]);
     }
     public function store(Request $request)
     {
-        // dd(request()->all());
+        // dd($request()->all());
         $request->validate([
             'question' => 'required',
-            'answer1' => 'required',
-            'answer2' => 'required',
-            'answer3' => 'required',
-            'answer4' => 'required',
-            'correctAnswer' => 'required',
+            'course_id' => 'required',
         ]);
 
-        $ee = new ExamQuestions();
+        $ee = new ExamQuestion();
 
         $ee->question = $request->get('question');
-        $ee->option_one = $request->get('answer1');
-        $ee->option_two = $request->get('answer2');
-        $ee->option_three = $request->get('answer3');
-        $ee->option_four = $request->get('answer4');
-        $ee->answer = $request->get('correctAnswer');
+        $ee->course_id = $request->get('course_id');
         $ee->save();
+        return redirect()->back()->with('success', 'question updated');
 
-        return view('questions.load-question')->with('success', 'question updated');
+        // return view('questions.load-question')->with('success', 'question updated');
     }
+
     public function show()
     {
+        $examQuestions = ExamQuestion::with(['options'])->get();
 
-        $examQuestions = ExamQuestions::get();
+        // dd($examQuestions);
         return view('questions.load-question', [
             'exam_questions' => $examQuestions
-            
         ]);
     }
 }

@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AnswerController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\ExamController;
+use App\Http\Controllers\OptionController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\ResultController;
 use App\Http\Controllers\SessionsController;
 use App\Models\Exam;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +23,7 @@ use Symfony\Component\Console\Helper\QuestionHelper;
 */
 
 Route::get('/', [CourseController::class, 'show'])->middleware('auth');
-Route::get('/dashboard',function(){
+Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('admin')->name('dashboard');
 //course list page
@@ -39,6 +41,17 @@ Route::post('/logout', [SessionsController::class, 'destroy'])->middleware('auth
 //exam question
 Route::get('/admin/question/create', [QuestionController::class, 'create'])->middleware('admin');
 Route::post('/admin/questions', [QuestionController::class, 'store'])->middleware('admin')->name('questions');
-
 //load exam question for student
-Route::get('/exam-questions', [QuestionController::class, 'show'])->middleware('auth')->name('load-question');
+Route::get('/load-questions', [QuestionController::class, 'show'])->middleware('auth')->name('load-question');
+
+//options
+Route::get('/admin/options/create', [OptionController::class, 'create'])->middleware('admin')->name('create-options');
+Route::post('/admin/options', [OptionController::class, 'store'])->middleware('admin')->name('options');
+Route::get('/load-options',  [OptionController::class, 'show'])->middleware('auth')->name('load-options');
+//answer
+Route::post('/answer', [AnswerController::class, 'store'])->middleware('auth')->name('create-answer');
+Route::get('/answers', [AnswerController::class, 'show'])->middleware('admin')->name('answers');
+
+Route::get('/results',[ResultController::class, 'show'])->middleware('admin')->name('result');
+Route::get('/result/{id?}',[ResultController::class, 'list'])->middleware('auth')->name('print-result');
+

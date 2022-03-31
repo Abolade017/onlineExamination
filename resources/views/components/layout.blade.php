@@ -30,27 +30,42 @@
             <div>
                 <h1 class="text-3xl font-bold text-center text-">Online Examination</h1>
             </div>
-
-            <div class="flex items-center space-x-4">
-                @auth
+            @auth
+                <div class="flex items-center space-x-4">
                     <span class="font-bold uppercase text-xs px-4">welcome,{{ auth()->user()->name }}</span>
-
-
                     <form action="/logout" method="post">
                         @csrf
                         <x-form.button>Logout</x-form.button>
-                    </form>
 
-                @else
-                    <a href="/reg" class="font-bold text-lg text-blue-500 hover:text-blue-700 hover:underline">Register</a>
-                    <a href="{{ route('login') }}"
-                        class="font-bold text-lg text-blue-500 hover:text-blue-700 hover:underline">Login</a>
-                @endauth
-            </div>
+                    </form>
+                </div>
+            @else
+                <a href="/reg" class="font-bold text-lg text-blue-500 hover:text-blue-700 hover:underline">Register</a>
+                <a href="{{ route('login') }}"
+                    class="font-bold text-lg text-blue-500 hover:text-blue-700 hover:underline">Login</a>
+            @endauth
+        </div>
+
+        {{-- <div class="flex items-center space-x-4">
+            <form action="/admin/question/create">
+                <x-form.button>create Questions</x-form.button>
+            </form>
+            <form action="/admin/course/create">
+                <x-form.button>create course</x-form.button>
+            </form>
+        </div> --}}
 
         </div>
         </div>
     </header>
-
-    {{ $slot }}
+    <div class="">
+        {{ $slot }}
+    </div>
+    <script>
+        @if (session('success'))
+            <div class="alert alert-success rounded-2xl flex justify-end bg-blue-600 text-white w-48 h-14  mb-10">
+                <p class="text-center items-center flex justify-center w-48 h-14"> {{ session('success') }}</p>
+            </div>
+        @endif
+    </script>
 </body>

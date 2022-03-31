@@ -1,5 +1,5 @@
 <x-layout>
-    <section class="mx-auto max-w-6xl py-10">
+    <section class="mx-auto max-w-4xl py-10">
         <div class="flex justify-between mt-10">
             <div>
                 <div class="mb-6">
@@ -19,51 +19,50 @@
             </div>
         </div>
         <div class="my-10">
-            @foreach ($exam_questions as $exam_question)
-                <div class="">
-                    <ol class="">
+            <form action="{{ route('create-answer') }}" method="post">
+                @csrf
+               
+                    <ol class="list-decimal">
+                        @foreach ($exam_questions as $question)
                         <li>
-                            <h1 class="font-bold text-lg">{{ $exam_question->question }}</h1>
-                            <div class="mb-4">
-                                <form action="#" method="post">
-                                    @csrf
-                                    <div>
-                                        <input type="radio" id="option_1" name="option_1" value="{{$exam_question->option_one}}">
-                                        <label for="{{ $exam_question->option_one }}">{{ $exam_question->option_one }}</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="option_1" name="option_2" value="{{ $exam_question->option_two }}">
-                                        <label for="{{ $exam_question->option_two }}">{{ $exam_question->option_two }}</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="option_1" name="option_3" value="{{ $exam_question->option_three }}">
-                                        <label for="{{ $exam_question->option_three }}" class="">{{ $exam_question->option_three }}</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="option_1" name="option_4" value="{{ $exam_question->option_four}}">
-                                        <label for="{{ $exam_question->option_four}}">{{ $exam_question->option_four }}</label>
-                                    </div>
-                                </form>
-                            </div>
+                            <h1 class="font-bold text-lg">{{ $question->question }}</h1>
                         </li>
+                    
+                        <div class="mb-4">
+                            <input type="hidden" name="question_id[]" value="{{$question->id}}" />
+                            @foreach ($question->options as $option)
+                                <ol class="option-list">
+                                    <div>
+                                        <label>
+                                            <input type="radio" name="answer_{{$question->id}}"
+                                                value="{{ $option->id }}">
+                                            {{ $option->value }}
+                                        </label>
+                                    </div>
+                                </ol>
+                            @endforeach
+                        </div>
+                        @endforeach
                     </ol>
+            
+                <div class="mb-4 flex justify-end">
+                    <x-form.button>Submit</x-form.button>
                 </div>
-            @endforeach
+            </form>
         </div>
     </section>
     <div id="app">
-        <example-component
-        {{-- :startTime= ""
-        :endTime=""
-        :hours=""
-        :minutes=""
-        :seconds="" --}}
-        ></example-component>
-    </div> 
+        <example-component></example-component>
+
+    </div>
     <script src="{{ asset('js/app.js') }}"></script>
-
-     {{-- <div class="flex justify-end items center pr-6">
-        <div class="flex justify-center items-center w-48 h-20 bg-blue-500 text-white rounded-lg text-2xl ">Timer</div>
-    </div> --}}
 </x-layout>
+<style>
+    .numeric{
+        list-style-type: decimal;
+    }
+    .option-list {
+        list-style-type: lower-alpha
+    }
 
+</style>

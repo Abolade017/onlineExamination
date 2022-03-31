@@ -1,23 +1,30 @@
 <template>
-  <div class="flex justify-end items center pr-6">
-    <div class="flex justify-between px-2 w-48 h-20 bg-blue-500 text-white rounded-lg text-2xl">
-      <div class="items-center">{{displayHours}}</div>
-      <div class="items-center">:</div>
-      <div class="items-center">{{displayMinutes}}</div>
-      <div class="items-center">:</div>
-      <div class="items-center">{{displaySeconds}}</div>
+  <div>
+    <div class="flex justify-end items center pr-6">
+      <div class="flex justify-between px-2 w-48 h-20 bg-blue-500 text-white rounded-lg text-2xl">
+        <div class="items-center">{{displayHours}}</div>
+        <div class="items-center">:</div>
+        <div class="items-center">{{displayMinutes}}</div>
+        <div class="items-center">:</div>
+        <div class="items-center">{{displaySeconds}}</div>
+      </div>
     </div>
+    <sum></sum>
   </div>
 </template>
 <script>
+import sum from "./practice";
 export default {
   name: "ExampleComponent",
+  components:{
+    sum
+  },
   data() {
     return {
       displayDays: 0,
       displayMinutes: 0,
       displayHours: 0,
-      displaySeconds: 0,
+      displaySeconds: 0
     };
   },
   mounted() {
